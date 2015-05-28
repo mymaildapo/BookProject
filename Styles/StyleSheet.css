@@ -1,0 +1,190 @@
+﻿body {
+    color: #000000;
+    font-family: Corbel, Arial, Helvetica, Verdana, sans-serif;
+    font-size: 16px;
+    background-color: lavender;
+}
+
+#wrapper {
+    width: 1100px;
+    margin: auto;
+    padding-bottom: 20px;
+    background-color: white;
+}
+
+#navigation
+{
+    height: 60px; 
+    border: 3px solid #E3E3E3;
+    margin-top: 20px;
+    background-image: url(../Images/bar_background.jpg);
+    text-shadow: 0.1em 0.1em #333;
+    font-weight: bolder;
+}
+
+#nav
+{
+    list-style: none;
+}
+
+#nav ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    display: none;
+}
+
+#nav li
+{
+   
+
+      font-size: 14px;
+    float: left;
+    position: relative;
+    width: 92px; /*100px*/
+    height: 50px;
+     padding: 0px 05px 0px 05px;
+      border-left: 1px solid #ffffff;
+    top: 5px;
+    left: 3px;
+}
+
+#nav li ul li
+{
+    background-image: url(../images/bar_background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 3px solid #e3e3e3;
+    padding-left: 10px;
+}
+
+#nav a:link, #nav a:active, #nav a:visited
+{
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+#nav a:hover
+{
+    color: lightblue;
+}
+
+a:visited {
+    display: block;
+    color: #574c3f;
+    text-decoration: none;
+}
+
+#content {
+    padding: 20px;
+    min-height: 400px;
+}
+
+/*Generic Controls*/
+.button {
+    background: linear-gradient(to bottom, darkgreen, green);
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 0;
+    clear: both;
+    width: 150px;
+}
+
+/*Webshop */
+#ContentPlaceHolder1_pnlProducts div {
+    float: left; /*put image and label side by side startin from left*/
+    width: 250px;
+    height: 250px;
+    text-align: center;
+}
+
+.productName {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.productPrice {
+    font-family: arial,helvetica,sans-serif;
+    color: #FF0000;
+}
+
+.productImage {
+    width: 150px;
+    height: 150px;
+    vertical-align: central;
+    padding: 10px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+/*Detail page*/
+.detailsImage {
+    height: 465px;
+    width: 400px;
+    margin-right: 30px;
+}
+
+.detailsDescription {
+    font-style: italic;
+    width: 300px;
+}
+
+.detailsPrice {
+    font-weight: bold;
+    font-size: 24px;
+    width: 200px;
+}
+
+.inputs {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #EAEAEA;
+    border: 1px solid #CACACA;
+    color: #444;
+    margin: 0 0 7px 0;
+    padding: 5px 9px;
+    width: 260px;
+}
+
+.inputs:focus {
+    background: #FFF;
+    -webkit-box-shadow: 0 0 25px #CCC;
+    -moz-box-shadow: 0 0 25px #ccc;
+    box-shadow: 0 0 25px #CCC;
+}
+
+/*Shopping Cart Page */
+.CartTable
+{
+    text-align: center;
+    border: 15px solid #f5f4f2;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+.CartTable input
+{
+    width: 65px;
+    height: 65px;
+}
+
+.CartTable h4
+{
+    padding: 0;
+    margin: 0;
+}
+
+.CartTable tr td select
+{
+    width: 100px;
+}
+

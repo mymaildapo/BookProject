@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BookDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookTB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="255" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Image" Type="nchar" MaxLength="255" />
+          <Property Name="author" Type="nchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="DatePurchased" Type="datetime" />
+          <Property Name="IsInCart" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="product" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="orderShipped" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Guid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostalCode" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BookTB_BookType">
+          <End Role="BookType" Type="Self.BookType" Multiplicity="1" />
+          <End Role="BookTB" Type="Self.BookTB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookTB">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carts_BookTB">
+          <End Role="BookTB" Type="Self.BookTB" Multiplicity="1" />
+          <End Role="Carts" Type="Self.Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookTB">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="orders1" Type="Self.orders" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookDBModelStoreContainer">
+          <EntitySet Name="BookTB" EntityType="Self.BookTB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookType" EntityType="Self.BookType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BookTB_BookType" Association="Self.FK_BookTB_BookType">
+            <End Role="BookType" EntitySet="BookType" />
+            <End Role="BookTB" EntitySet="BookTB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carts_BookTB" Association="Self.FK_Carts_BookTB">
+            <End Role="BookTB" EntitySet="BookTB" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_orders" Association="Self.FK_orders_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orders1" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BookDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BookTB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="author" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BookType" Relationship="Self.FK_BookTB_BookType" FromRole="BookTB" ToRole="BookType" />
+          <NavigationProperty Name="Carts" Relationship="BookDBModel.FK_Carts_BookTB" FromRole="BookTB" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="BookType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BookTBs" Relationship="Self.FK_BookTB_BookType" FromRole="BookType" ToRole="BookTB" />
+        </EntityType>
+        <Association Name="FK_BookTB_BookType">
+          <End Role="BookType" Type="Self.BookType" Multiplicity="1" />
+          <End Role="BookTB" Type="Self.BookTB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookTB">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookTBs" EntityType="Self.BookTB" />
+          <EntitySet Name="BookTypes" EntityType="Self.BookType" />
+          <AssociationSet Name="FK_BookTB_BookType" Association="Self.FK_BookTB_BookType">
+            <End Role="BookType" EntitySet="BookTypes" />
+            <End Role="BookTB" EntitySet="BookTBs" />
+          </AssociationSet>
+          <EntitySet Name="Carts" EntityType="BookDBModel.Cart" />
+          <AssociationSet Name="FK_Carts_BookTB" Association="BookDBModel.FK_Carts_BookTB">
+            <End Role="BookTB" EntitySet="BookTBs" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <EntitySet Name="UserDetails" EntityType="BookDBModel.UserDetail" />
+          <EntitySet Name="orders" EntityType="BookDBModel.order" />
+          <AssociationSet Name="FK_orders_orders" Association="BookDBModel.FK_orders_orders">
+            <End Role="order" EntitySet="orders" />
+            <End Role="order1" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="DatePurchased" Type="DateTime" Precision="3" />
+          <Property Name="IsInCart" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BookTB" Relationship="BookDBModel.FK_Carts_BookTB" FromRole="Cart" ToRole="BookTB" />
+        </EntityType>
+        <Association Name="FK_Carts_BookTB">
+          <End Type="BookDBModel.BookTB" Role="BookTB" Multiplicity="1" />
+          <End Type="BookDBModel.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookTB">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Guid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="product" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="orderShipped" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="orders1" Relationship="BookDBModel.FK_orders_orders" FromRole="order" ToRole="order1" />
+          <NavigationProperty Name="order1" Relationship="BookDBModel.FK_orders_orders" FromRole="order1" ToRole="order" />
+        </EntityType>
+        <Association Name="FK_orders_orders">
+          <End Type="BookDBModel.order" Role="order" Multiplicity="1" />
+          <End Type="BookDBModel.order" Role="order1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BookDBModelStoreContainer" CdmEntityContainer="BookDBEntities1">
+          <EntitySetMapping Name="BookTBs">
+            <EntityTypeMapping TypeName="BookDBModel.BookTB">
+              <MappingFragment StoreEntitySet="BookTB">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="author" ColumnName="author" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookTypes">
+            <EntityTypeMapping TypeName="BookDBModel.BookType">
+              <MappingFragment StoreEntitySet="BookType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="BookDBModel.Cart">
+              <MappingFragment StoreEntitySet="Carts">
+                <ScalarProperty Name="IsInCart" ColumnName="IsInCart" />
+                <ScalarProperty Name="DatePurchased" ColumnName="DatePurchased" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="BookDBModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="BookDBModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="orderShipped" ColumnName="orderShipped" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

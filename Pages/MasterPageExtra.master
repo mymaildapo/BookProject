@@ -1,0 +1,136 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageExtra.master.cs" Inherits="Pages_MasterPageExtra" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    
+    <link href="../css/bootstrap.css" rel="stylesheet" />
+    <link href="../Styles/StyleSheet.css?version=1" rel="stylesheet" />
+    <script src="../JavaScript/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript">
+        function mainmenu() {
+            $(" #nav ul ").css({ display: "none" }); // Opera Fix
+
+            $(" #nav li").hover(function () {
+                $(this).find('ul:first').css({ visibility: "visible", display: "none" }).show(400);
+            }
+            , function () {
+                $(this).find('ul:first').css({ visibility: "hidden" });
+            });
+        }
+
+        $(document).ready(function () {
+            mainmenu();
+        });
+    </script>
+    
+     <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+       <br/>
+            <div id="wrapper">
+            <div id="myCarous" class="carousel slide">
+     
+            <ol class="carousel-indicators">
+          
+                <li data-target= "#myCarous" data-slide-to="0" class = "active"></li>
+                <li data-target= "#myCarous" data-slide-to= "1" ></li>
+                <li data-target="#myCarous" data-slide-to= "2" ></li>
+            </ol>
+             
+            <div class="carousel-inner">
+                <div class="item">
+                         
+
+                      <asp:Image ID="Image1" runat="server" ImageUrl="../Images/header1.jpg" Width="100%" />
+                         
+                </div>
+           
+                <div class="item active">
+                   <asp:Image ID="Image2" runat="server" ImageUrl="../Images/header2.jpg" Width="100%" />
+                    
+                    
+                </div>
+                <div  class="item">
+                   <asp:Image ID="Image3" runat="server" ImageUrl="../Images/header3.jpg" Width="100%" />
+                    
+                 </div>
+           
+            <a class="carousel-control left" href="#myCarous" data-slide="prev">
+                <span class="icon-prev"></span>
+            </a>
+             <a class="carousel-control right" href="#myCarous" data-slide="next">
+                     <span class="icon-next"></span>
+            </a>
+    </div> 
+                <div id="navigation">
+                    <ul id="nav">
+                       <li>
+                            <asp:HyperLink runat="server" NavigateUrl="~/Default.aspx">HOME</asp:HyperLink></li>
+                         <li>
+                            <asp:HyperLink runat="server" NavigateUrl="~/Pages/BookStore.aspx">BOOKS</asp:HyperLink></li>
+                         <li>
+                            <asp:HyperLink runat="server" NavigateUrl="~/Pages/Dept.aspx">DEPT</asp:HyperLink></li>
+                     
+                        <li>
+                            <asp:HyperLink runat="server" NavigateUrl="~/Pages/ebook.aspx">EBOOKS</asp:HyperLink></li>
+                         
+                         <li>
+                            <asp:HyperLink runat="server" NavigateUrl="~/Pages/Stationary.aspx">STATIONARY</asp:HyperLink></li>
+               
+                         <li><a href="#">FAVORITE</a>
+                    <ul>
+                        
+                       <li><a href="Kids.aspx" runat="server">KIDS</a></li>
+                        <li><a href="Gift.aspx" runat="server">GIFT</a></li>
+                        <li><a href="Magazine.aspx" runat="server">MAGAZINE</a></li>
+                    </ul>
+                </li>
+                        <li>
+                            <asp:HyperLink runat="server" NavigateUrl="~/Pages/eReader.aspx">EREADER</asp:HyperLink></li>
+               
+              <li><a href="#">ADMIN</a>
+                    <ul>
+                       <li><a href="Managemet/ManageBooks.aspx" runat="server">ADD NEW BOOK</a></li>
+                        <li><a href="Managemet/ManageBooksDetails.aspx" runat="server">MANAGE BOOKS</a></li>
+                        <li><a href="Managemet/Managements.aspx" runat="server">NEW CATEGORY</a></li>
+                    </ul>
+                </li>
+                      
+                      <li style="float: right">
+                            <asp:HyperLink ID="lnkRegister" runat="server" NavigateUrl="~/Pages/Account/Register.aspx">REGISTER</asp:HyperLink>
+                            <asp:HyperLink ID="litStatus" runat="server" NavigateUrl="~/Pages/ShoppingCart.aspx"></asp:HyperLink>
+                        </li>
+                        <li style="float: right">
+                            <asp:HyperLink ID="LnkLogIn" runat="server" NavigateUrl="~/Pages/Account/Login.aspx">LOG IN</asp:HyperLink>
+                            <asp:LinkButton ID="btnLogOut" runat="server" Text="LOG OUT" Height="19px" OnClick="btnLogOut_Click" />
+                        </li>
+                    </ul>
+
+                </div>
+                <div id="content">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </form>
+      
+    <script src="../js/jquery-1.11.0.js"></script>
+    <script src="../js/bootstrap.js"></script>
+      <div align="center">
+                         
+                    <br />
+                    <br />
+                    <br />
+                                             Copyright &copy; Dapo Oloruntola 2015
+                                                   </div>
+                                             </div>
+                 </div>
+</body>
+</html>
